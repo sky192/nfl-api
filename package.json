@@ -1,0 +1,28 @@
+{
+  "name": "nfl-api",
+  "version": "1.0.0",
+  "description": "## Instructions In the initial commit to this project, you have been provided data about NFL teams. Over the course of the next couple of classes we will use this data to build up a REST API. These exercises will be completed in class.",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/nodemon index.js",
+    "lint": "./node_modules/.bin/eslint --format codeframe .",
+    "lint:fix": "./node_modules/.bin/eslint --format codeframe --fix ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stackeducation/nfl-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stackeducation/nfl-api/issues"
+  },
+  "homepage": "https://github.com/stackeducation/nfl-api#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
