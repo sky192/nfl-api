@@ -1,28 +1,22 @@
-const teams = require('../teams')
+const models = require('../models')
 
-const getAllTeams = (request, response) => {
+const getAllTeams = async (request, response) => {
+  const teams = await models.Teams.findAll()
+
   return response.send(teams)
 }
 
-const getTeamById = (request, response) => {
+const getTeamById = async (request, response) => {
   const { id } = request.params
 
-  const matchingTeams = teams.find((team) => team.id === parseInt(id))
+  const matchingTeam = await models.Teams.findOne({ where: { id } })
 
-  return matchingTeams
-    ? response.send(matchingTeams)
+  return matchingTeam
+    ? response.send(matchingTeam)
     : response.sendStatus(404)
 }
 
-const getNextId = () => {
-  const lastId = teams.reduce((acc, team) => {
-    return team.id > acc ? team.id : acc
-  }, 0)
-
-  return lastId + 1
-}
-
-const saveNewTeam = (request, response) => {
+const saveNewTeam = async (request, response) => {
   const {
     location, mascot, abbreviation, conference, division
   } = request.body
@@ -33,11 +27,9 @@ const saveNewTeam = (request, response) => {
       .send('The following fields are required: location, mascot, abbreviation, conference, division')
   }
 
-  const newTeam = {
-    location, mascot, abbreviation, conference, division, id: getNextId()
-  }
-
-  teams.push(newTeam)
+  const newTeam = await models.Teams.create({
+    location, mascot, abbreviation, conference, division
+  })
 
   return response.status(201).send(newTeam)
 }
